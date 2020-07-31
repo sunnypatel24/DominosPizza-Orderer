@@ -2,6 +2,8 @@
 
 This is a program that allows you to place an order from your nearest Dominos Pizza. You will be asked to enter in personal information, such as name, address, and phone number, as well as credit card information for when you pay for the order.
 
+Download the entire pizzaapi-master folder and run the pizza.py file to execute the program.
+
 IMPORTANT: You MUST enter information in the format given below, or the program will crash!
 
 When prompted for your full information, please enter in the following format:
