@@ -15,25 +15,38 @@ def intro():
 
 
 def get_customer_info():
-    enter_info = input("Please enter your full information: ")
-    full_info = enter_info.split(", ")
-    fname = full_info[0]
-    lname = full_info[1]
-    email = full_info[2]
-    phone = full_info[3]
-    customer = Customer(fname, lname, email, phone)
+    valid_info = True
+    while valid_info:
+        try:
+            enter_info = input("Please enter your full information, seperated by commas (first name, last name, email, phone number): ")
+            full_info = enter_info.split(",")
+            fname = full_info[0]
+            lname = full_info[1]
+            email = full_info[2]
+            phone = full_info[3]
+            customer = Customer(fname, lname, email, phone)
+            break
+        except IndexError:
+            print()
+            print("Invalid input. Please type all information in the required format.\n")
     print("\n")
     return customer
 
 
 def get_address():
-    enter_address = input("Please enter your full address: ")
-    full_address = enter_address.split(", ")
-    street = full_address[0]
-    city = full_address[1]
-    state = full_address[2]
-    zip_code = full_address[3]
-    address = Address(street, city, state, zip_code)
+    valid_address = True
+    while valid_address:
+        try:
+            enter_address = input("Please enter your full address (street, city, state, zip code): ")
+            full_address = enter_address.split(",")
+            street = full_address[0]
+            city = full_address[1]
+            state = full_address[2]
+            zip_code = full_address[3]
+            address = Address(street, city, state, zip_code)
+            break
+        except IndexError:
+            print("Invalid input. Please type all information in the required format.\n")
     print("\n")
     return address
 
@@ -54,12 +67,11 @@ def get_order(address, customer):
         if (code != ""):
             order.add_item(code)
             current_order.append(code)
+        print("Your current order is the following: ")
+        for item in current_order:
+            print(item)
         print("\n")
         search_menu = input("Would you like to search the menu for an item? Enter 'y' for yes or 'n' for no: ")
-    print("\n")
-    print("Your current order is the following: ")
-    for item in current_order:
-        print(item)
     print("\n")
     remove = input("Would you like to remove anything from your order? Enter 'y' for yes or 'n' for no: ")
     while (remove == 'y'):
@@ -73,13 +85,19 @@ def get_order(address, customer):
 
 
 def get_card():
-    get_payment_info = input("Please enter the required credit card information: ")
-    full_card = get_payment_info.split(", ")
-    number = full_card[0]
-    expiration = full_card[1]
-    cvv = full_card[2]
-    zip_code = full_card[3]
-    card = PaymentObject(number, expiration, cvv, zip_code)
+    valid_card = True
+    while valid_card:
+        try:
+            get_payment_info = input("Please enter the required credit card information (card number, expiration date w/o backslash, cvv, zip code): ")
+            full_card = get_payment_info.split(",")
+            number = full_card[0]
+            expiration = full_card[1]
+            cvv = full_card[2]
+            zip_code = full_card[3]
+            card = PaymentObject(number, expiration, cvv, zip_code)
+            break
+        except IndexError:
+            print("Invalid input. Please type all information in the required format.\n")
     print("\n")
     return card
 
@@ -90,6 +108,9 @@ def place_order(order, card):
         order.place(card)
         print("\n")
         print("Order has been placed!")
+    else:
+        print("\n")
+        print("Order has been cancelled.")
 
 
 main()
